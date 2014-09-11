@@ -10,8 +10,9 @@ import SpriteKit
 
 class GameScene: SKScene {
   
-  weak var shipTouch:UITouch?
-  var lastUpdateTime:NSTimeInterval? = nil
+  weak var shipTouch: UITouch?
+  var lastUpdateTime: NSTimeInterval? = nil
+  var lastShotFireTime: NSTimeInterval? = nil
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -40,8 +41,30 @@ class GameScene: SKScene {
     if let touch = shipTouch {
       let pt = touch.locationInNode(self)
       moveShipTowardPoint(pt, byTimeDelta: timeDelta)
+      
+      if lastShotFireTime == nil || currentTime - lastShotFireTime! > 0.5 {
+        shoot()
+        lastShotFireTime = currentTime
+      }
+      
       lastUpdateTime = currentTime
     }
+    
+  }
+  
+  func shoot() {
+    let ship = childNodeWithName("ship")!
+    let photon = SKSpriteNode(imageNamed: "photon")
+    photon.name = "photon"
+    photon.position = ship.position
+    addChild(photon)
+    
+    let fly = SKAction.moveByX(0,
+      y: self.size.height + photon.size.height,
+      duration: 0.5)
+    photon.runAction(fly)
+    
+    
   }
   
   func moveShipTowardPoint(point: CGPoint, byTimeDelta timeDelta: NSTimeInterval) {

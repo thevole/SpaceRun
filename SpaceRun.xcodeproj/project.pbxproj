@@ -15,6 +15,8 @@
 		5B3E745519C2435900AEFB6E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B3E745419C2435900AEFB6E /* Images.xcassets */; };
 		5B3E745819C2435900AEFB6E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B3E745619C2435900AEFB6E /* LaunchScreen.xib */; };
 		5B3E746419C2435900AEFB6E /* SpaceRunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E746319C2435900AEFB6E /* SpaceRunTests.swift */; };
+		5B99E92E19C24D2D006EC4BD /* asteroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B99E92C19C24D2D006EC4BD /* asteroid.png */; };
+		5B99E92F19C24D2D006EC4BD /* photon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B99E92D19C24D2D006EC4BD /* photon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		5B3E745D19C2435900AEFB6E /* SpaceRunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpaceRunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B3E746219C2435900AEFB6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B3E746319C2435900AEFB6E /* SpaceRunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceRunTests.swift; sourceTree = "<group>"; };
+		5B99E92C19C24D2D006EC4BD /* asteroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroid.png; sourceTree = "<group>"; };
+		5B99E92D19C24D2D006EC4BD /* photon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 		5B3E744719C2435900AEFB6E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B99E92C19C24D2D006EC4BD /* asteroid.png */,
+				5B99E92D19C24D2D006EC4BD /* photon.png */,
 				5B3E744819C2435900AEFB6E /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -201,7 +207,9 @@
 				5B3E745819C2435900AEFB6E /* LaunchScreen.xib in Resources */,
 				5B3E745519C2435900AEFB6E /* Images.xcassets in Resources */,
 				5B3E744C19C2435900AEFB6E /* GameScene.sks in Resources */,
+				5B99E92E19C24D2D006EC4BD /* asteroid.png in Resources */,
 				5B3E745319C2435900AEFB6E /* Main.storyboard in Resources */,
+				5B99E92F19C24D2D006EC4BD /* photon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +421,7 @@
 				5B3E746919C2435900AEFB6E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5B3E746A19C2435900AEFB6E /* Build configuration list for PBXNativeTarget "SpaceRunTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +430,7 @@
 				5B3E746C19C2435900AEFB6E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

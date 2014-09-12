@@ -87,6 +87,14 @@ class GameScene: SKScene {
         if ship.intersectsNode(powerup) {
           powerup.removeFromParent()
           self.shipFireRate = 0.1
+          let powerdown = SKAction.runBlock({
+            self.shipFireRate = 0.5
+          })
+          let wait = SKAction.waitForDuration(5.0)
+          let waitAndPowerdown = SKAction.sequence([wait, powerdown])
+          ship.removeActionForKey("waitAndPowerDown")
+          ship.runAction(waitAndPowerdown, withKey: "waitAndPowerDown")
+
         }
       }
       enumerateChildNodesWithName("obstacle") {

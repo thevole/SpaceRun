@@ -28,6 +28,7 @@
 		5BA7AC4519C36D0600619616 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7AC4319C36D0600619616 /* spark.png */; };
 		5BE0351419C37827009D19AA /* thrust.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5BA7AC4219C36D0600619616 /* thrust.sks */; };
 		5BE0351619C37EE4009D19AA /* obstacleExplode.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0351519C37EE4009D19AA /* obstacleExplode.sks */; };
+		5BE0351819C37F87009D19AA /* shipExplode.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5BE0351719C37F87009D19AA /* shipExplode.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		5BA7AC4219C36D0600619616 /* thrust.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = thrust.sks; sourceTree = "<group>"; };
 		5BA7AC4319C36D0600619616 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		5BE0351519C37EE4009D19AA /* obstacleExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = obstacleExplode.sks; sourceTree = "<group>"; };
+		5BE0351719C37F87009D19AA /* shipExplode.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = shipExplode.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				5BA7AC4219C36D0600619616 /* thrust.sks */,
 				5BA7AC4319C36D0600619616 /* spark.png */,
 				5BE0351519C37EE4009D19AA /* obstacleExplode.sks */,
+				5BE0351719C37F87009D19AA /* shipExplode.sks */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				5B3E745819C2435900AEFB6E /* LaunchScreen.xib in Resources */,
 				5B3E745519C2435900AEFB6E /* Images.xcassets in Resources */,
 				5B07075B19C32B48008519CD /* enemy.png in Resources */,
+				5BE0351819C37F87009D19AA /* shipExplode.sks in Resources */,
 				5BA7AC4519C36D0600619616 /* spark.png in Resources */,
 				5B07076319C34BA1008519CD /* powerup.png in Resources */,
 				5BE0351419C37827009D19AA /* thrust.sks in Resources */,

@@ -56,17 +56,28 @@ class GameScene: SKScene {
     
   }
   
+  func randomCGFloatTo(limit: Int) -> CGFloat {
+    return CGFloat(arc4random_uniform(UInt32(limit)))
+  }
+  
+  func randomCGFloatTo(limit: CGFloat) -> CGFloat {
+    return CGFloat(arc4random_uniform(UInt32(limit)))
+  }
+  
   func dropAsteroid() {
-    let sideSize = CGFloat(15 + arc4random_uniform(UInt32(30)))
-    let maxX = self.size.width
+    let sideSize = CGFloat(15 + randomCGFloatTo(30))
+    let maxX = CGFloat(self.size.width)
+
     let quarterX = maxX / 4
-    let startX = CGFloat(arc4random_uniform(UInt32(maxX + (quarterX * 2)))) - quarterX
+
+    let startX = randomCGFloatTo(maxX + (quarterX * 2)) - quarterX
     let startY = self.size.height + sideSize
-    let endX = CGFloat(arc4random_uniform(UInt32(maxX)))
+    let endX = randomCGFloatTo(maxX)
     let endY = CGFloat(0 - sideSize)
     
     let asteroid = SKSpriteNode(imageNamed: "asteroid")
     asteroid.size = CGSize(width: sideSize, height: sideSize)
+
     asteroid.position = CGPoint(x: startX, y: startY)
     asteroid.name = "obstacle"
     addChild(asteroid)

@@ -26,6 +26,10 @@ class GameScene: SKScene {
     super.init(coder: aDecoder)
     
     backgroundColor = SKColor.blackColor()
+    
+    let starField = StarField.node()
+    addChild(starField)
+    
     let name = "Spaceship.png"
     let ship = SKSpriteNode(imageNamed: name)
     let size = self.size
@@ -233,35 +237,36 @@ class GameScene: SKScene {
   }
   
   func shoot() {
-    let ship = childNodeWithName("ship")!
-    let photon = SKSpriteNode(imageNamed: "photon")
-    photon.name = "photon"
-    photon.position = ship.position
-    addChild(photon)
-    
-    let fly = SKAction.moveByX(0,
-      y: self.size.height + photon.size.height,
-      duration: 0.5)
-    let remove = SKAction.removeFromParent()
-    let fireAndRemove = SKAction.sequence([fly, remove])
-    photon.runAction(fireAndRemove)
-    runAction(shootSound)
+    if let ship = childNodeWithName("ship") {
+      let photon = SKSpriteNode(imageNamed: "photon")
+      photon.name = "photon"
+      photon.position = ship.position
+      addChild(photon)
+      
+      let fly = SKAction.moveByX(0,
+        y: self.size.height + photon.size.height,
+        duration: 0.5)
+      let remove = SKAction.removeFromParent()
+      let fireAndRemove = SKAction.sequence([fly, remove])
+      photon.runAction(fireAndRemove)
+      runAction(shootSound)
+    }
   }
   
   func moveShipTowardPoint(point: CGPoint, byTimeDelta timeDelta: NSTimeInterval) {
     let shipSpeed = 130 // points per second
-    let ship = childNodeWithName("ship")!
-    
-    let distanceLeft = sqrt(pow(ship.position.x - point.x, 2) +
-      pow(ship.position.y - point.y, 2))
-    if distanceLeft > 4 {
-      let distanceToTravel: CGFloat = CGFloat(timeDelta) * CGFloat(shipSpeed)
-      let angle = atan2(point.y - ship.position.y, point.x - ship.position.x)
-      let yOffset = distanceToTravel * sin(angle)
-      let xOffset = distanceToTravel * cos(angle)
-      
-      ship.position = CGPoint(x: ship.position.x + xOffset,
-        y: ship.position.y + yOffset)
+    if let ship = childNodeWithName("ship") {
+      let distanceLeft = sqrt(pow(ship.position.x - point.x, 2) +
+        pow(ship.position.y - point.y, 2))
+      if distanceLeft > 4 {
+        let distanceToTravel: CGFloat = CGFloat(timeDelta) * CGFloat(shipSpeed)
+        let angle = atan2(point.y - ship.position.y, point.x - ship.position.x)
+        let yOffset = distanceToTravel * sin(angle)
+        let xOffset = distanceToTravel * cos(angle)
+        
+        ship.position = CGPoint(x: ship.position.x + xOffset,
+          y: ship.position.y + yOffset)
+      }
     }
   }
   

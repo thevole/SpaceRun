@@ -12,6 +12,8 @@
 		5B07076019C34B32008519CD /* shipExplode.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5B07075D19C349BF008519CD /* shipExplode.m4a */; };
 		5B07076119C34B35008519CD /* obstacleExplode.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5B07075C19C349BF008519CD /* obstacleExplode.m4a */; };
 		5B07076319C34BA1008519CD /* powerup.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B07076219C34BA1008519CD /* powerup.png */; };
+		5B07076519C364A8008519CD /* StarField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07076419C364A8008519CD /* StarField.swift */; };
+		5B37FA4C19C367B10056A786 /* shootingstar.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B37FA4B19C367B10056A786 /* shootingstar.png */; };
 		5B3E744A19C2435900AEFB6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E744919C2435900AEFB6E /* AppDelegate.swift */; };
 		5B3E744C19C2435900AEFB6E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B3E744B19C2435900AEFB6E /* GameScene.sks */; };
 		5B3E744E19C2435900AEFB6E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E744D19C2435900AEFB6E /* GameScene.swift */; };
@@ -40,6 +42,8 @@
 		5B07075D19C349BF008519CD /* shipExplode.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipExplode.m4a; sourceTree = "<group>"; };
 		5B07075E19C349BF008519CD /* shoot.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = shoot.m4a; sourceTree = "<group>"; };
 		5B07076219C34BA1008519CD /* powerup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = powerup.png; sourceTree = "<group>"; };
+		5B07076419C364A8008519CD /* StarField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarField.swift; sourceTree = "<group>"; };
+		5B37FA4B19C367B10056A786 /* shootingstar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shootingstar.png; sourceTree = "<group>"; };
 		5B3E744419C2435900AEFB6E /* SpaceRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B3E744819C2435900AEFB6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B3E744919C2435900AEFB6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +78,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B37FA4A19C367990056A786 /* SpriteImages */ = {
+			isa = PBXGroup;
+			children = (
+				5B37FA4B19C367B10056A786 /* shootingstar.png */,
+				5B07076219C34BA1008519CD /* powerup.png */,
+				5B07075A19C32B48008519CD /* enemy.png */,
+				5B99E92C19C24D2D006EC4BD /* asteroid.png */,
+				5B99E92D19C24D2D006EC4BD /* photon.png */,
+			);
+			name = SpriteImages;
+			sourceTree = "<group>";
+		};
 		5B3E743B19C2435900AEFB6E = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +119,7 @@
 				5B3E745419C2435900AEFB6E /* Images.xcassets */,
 				5B3E745619C2435900AEFB6E /* LaunchScreen.xib */,
 				5B3E744719C2435900AEFB6E /* Supporting Files */,
+				5B07076419C364A8008519CD /* StarField.swift */,
 			);
 			path = SpaceRun;
 			sourceTree = "<group>";
@@ -110,13 +127,10 @@
 		5B3E744719C2435900AEFB6E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5B07076219C34BA1008519CD /* powerup.png */,
+				5B37FA4A19C367990056A786 /* SpriteImages */,
 				5B07075C19C349BF008519CD /* obstacleExplode.m4a */,
 				5B07075D19C349BF008519CD /* shipExplode.m4a */,
 				5B07075E19C349BF008519CD /* shoot.m4a */,
-				5B07075A19C32B48008519CD /* enemy.png */,
-				5B99E92C19C24D2D006EC4BD /* asteroid.png */,
-				5B99E92D19C24D2D006EC4BD /* photon.png */,
 				5B3E744819C2435900AEFB6E /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -227,6 +241,7 @@
 				5B99E92E19C24D2D006EC4BD /* asteroid.png in Resources */,
 				5B07076119C34B35008519CD /* obstacleExplode.m4a in Resources */,
 				5B3E745319C2435900AEFB6E /* Main.storyboard in Resources */,
+				5B37FA4C19C367B10056A786 /* shootingstar.png in Resources */,
 				5B07076019C34B32008519CD /* shipExplode.m4a in Resources */,
 				5B07075F19C34B2B008519CD /* shoot.m4a in Resources */,
 				5B99E92F19C24D2D006EC4BD /* photon.png in Resources */,
@@ -247,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B07076519C364A8008519CD /* StarField.swift in Sources */,
 				5B3E744E19C2435900AEFB6E /* GameScene.swift in Sources */,
 				5B3E745019C2435900AEFB6E /* GameViewController.swift in Sources */,
 				5B3E744A19C2435900AEFB6E /* AppDelegate.swift in Sources */,

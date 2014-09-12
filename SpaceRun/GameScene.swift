@@ -20,6 +20,9 @@ class GameScene: SKScene {
   var shipExplodeSound: SKAction?
   var obstacleExplodeSound: SKAction?
   
+  var shipExplodeTemplate: SKEmitterNode?
+  var obstacleExplodeTemplate: SKEmitterNode?
+  
   
   required init(coder aDecoder: NSCoder) {
     shipFireRate = 0.5
@@ -41,6 +44,9 @@ class GameScene: SKScene {
     let thrust = SKEmitterNode.nodeWithFile("thrust.sks")!
     thrust.position = CGPoint(x: 0, y: -20)
     ship.addChild(thrust)
+    
+    shipExplodeTemplate = SKEmitterNode.nodeWithFile("shipExplode.sks")
+    obstacleExplodeTemplate = SKEmitterNode.nodeWithFile("obstacleExplode.sks")
     
     // Add sounds
     shootSound = SKAction.playSoundFileNamed("shoot.m4a", waitForCompletion: false)
@@ -112,6 +118,10 @@ class GameScene: SKScene {
           ship.removeFromParent()
           obstacle.removeFromParent()
           self.runAction(self.shipExplodeSound)
+          let explosion: SKEmitterNode = self.shipExplodeTemplate!.copy() as SKEmitterNode
+          explosion.position = ship.position
+          explosion.dieOutInDuration(0.3)
+          self.addChild(explosion)
         }
         self.enumerateChildNodesWithName("photon") {
           photon, stop in
@@ -119,6 +129,12 @@ class GameScene: SKScene {
             photon.removeFromParent()
             obstacle.removeFromParent()
             self.runAction(self.obstacleExplodeSound)
+            
+            let explosion: SKEmitterNode = self.obstacleExplodeTemplate!.copy() as SKEmitterNode
+            explosion.position = obstacle.position
+            explosion.dieOutInDuration(0.1)
+            self.addChild(explosion)
+            
             stop.memory = true
           }
         }

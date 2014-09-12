@@ -27,4 +27,16 @@ extension SKEmitterNode {
     archiver.finishDecoding()
     return node
   }
+  
+  func dieOutInDuration(duration: NSTimeInterval) {
+    let firstWait = SKAction.waitForDuration(duration)
+    weak var weakSelf: SKEmitterNode! = self
+    let stop = SKAction.runBlock {
+      weakSelf.particleBirthRate = 0.0
+    }
+    let secondWait = SKAction.waitForDuration(NSTimeInterval(particleLifetime))
+    let remove = SKAction.removeFromParent()
+    let dieOut = SKAction.sequence([firstWait, stop, secondWait, remove])
+    self.runAction(dieOut)
+  }
 }

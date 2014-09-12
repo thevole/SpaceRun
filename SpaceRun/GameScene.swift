@@ -12,8 +12,9 @@ class GameScene: SKScene {
   
   weak var shipTouch: UITouch?
   
-  var lastUpdateTime: NSTimeInterval? = nil
-  var lastShotFireTime: NSTimeInterval? = nil
+  var lastUpdateTime: NSTimeInterval?
+  var lastShotFireTime: NSTimeInterval?
+  var shipFireRate: CGFloat
   
   var shootSound: SKAction?
   var shipExplodeSound: SKAction?
@@ -21,7 +22,9 @@ class GameScene: SKScene {
   
   
   required init(coder aDecoder: NSCoder) {
+    shipFireRate = 0.5
     super.init(coder: aDecoder)
+    
     backgroundColor = SKColor.blackColor()
     let name = "Spaceship.png"
     let ship = SKSpriteNode(imageNamed: name)
@@ -54,7 +57,7 @@ class GameScene: SKScene {
       let pt = touch.locationInNode(self)
       moveShipTowardPoint(pt, byTimeDelta: timeDelta)
       
-      if lastShotFireTime == nil || currentTime - lastShotFireTime! > 0.5 {
+      if lastShotFireTime == nil || CGFloat(currentTime - lastShotFireTime!) > shipFireRate {
         shoot()
         lastShotFireTime = currentTime
       }
@@ -79,6 +82,13 @@ class GameScene: SKScene {
   
   func checkCollisions() {
     if let ship = childNodeWithName("ship") {
+      enumerateChildNodesWithName("powerup") {
+        powerup, stop in
+        if ship.intersectsNode(powerup) {
+          powerup.removeFromParent()
+          self.shipFireRate = 0.1
+        }
+      }
       enumerateChildNodesWithName("obstacle") {
         obstacle, stop in
           if ship.intersectsNode(obstacle) {
@@ -102,11 +112,35 @@ class GameScene: SKScene {
   
   func dropThing() {
     let dice = arc4random_uniform(100)
-    if dice < 15 {
+    if dice < 5 {
+      dropPowerup()
+    } else if dice < 20 {
       dropEnemyShip()
     } else {
       dropAsteroid()
     }
+  }
+  
+  func dropPowerup() {
+    let sideSize = CGFloat(30)
+    let startX = randomCGFloatTo(self.size.width - 60.0) + 30
+    let startY = self.size.height + sideSize
+    let endY = 0 - sideSize
+    
+    let powerup = SKSpriteNode(imageNamed: "powerup")
+    powerup.name = "powerup"
+    powerup.size = CGSize(width: sideSize, height: sideSize)
+    powerup.position = CGPoint(x: startX, y: startY)
+    addChild(powerup)
+    
+    let move = SKAction.moveTo(CGPoint(x: startX, y: endY), duration: NSTimeInterval(6))
+    let spin = SKAction.rotateByAngle(-1.0, duration: NSTimeInterval(1))
+    let remove = SKAction.removeFromParent()
+    
+    let spinForever = SKAction.repeatActionForever(spin)
+    let travelAndRemove = SKAction.sequence([move, remove])
+    let all = SKAction.group([spinForever, travelAndRemove])
+    powerup.runAction(all)
   }
   
   func dropEnemyShip() {

@@ -11,6 +11,7 @@
 		5B07075F19C34B2B008519CD /* shoot.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5B07075E19C349BF008519CD /* shoot.m4a */; };
 		5B07076019C34B32008519CD /* shipExplode.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5B07075D19C349BF008519CD /* shipExplode.m4a */; };
 		5B07076119C34B35008519CD /* obstacleExplode.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5B07075C19C349BF008519CD /* obstacleExplode.m4a */; };
+		5B07076319C34BA1008519CD /* powerup.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B07076219C34BA1008519CD /* powerup.png */; };
 		5B3E744A19C2435900AEFB6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E744919C2435900AEFB6E /* AppDelegate.swift */; };
 		5B3E744C19C2435900AEFB6E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B3E744B19C2435900AEFB6E /* GameScene.sks */; };
 		5B3E744E19C2435900AEFB6E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E744D19C2435900AEFB6E /* GameScene.swift */; };
@@ -38,6 +39,7 @@
 		5B07075C19C349BF008519CD /* obstacleExplode.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = obstacleExplode.m4a; sourceTree = "<group>"; };
 		5B07075D19C349BF008519CD /* shipExplode.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = shipExplode.m4a; sourceTree = "<group>"; };
 		5B07075E19C349BF008519CD /* shoot.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = shoot.m4a; sourceTree = "<group>"; };
+		5B07076219C34BA1008519CD /* powerup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = powerup.png; sourceTree = "<group>"; };
 		5B3E744419C2435900AEFB6E /* SpaceRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B3E744819C2435900AEFB6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B3E744919C2435900AEFB6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		5B3E744719C2435900AEFB6E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B07076219C34BA1008519CD /* powerup.png */,
 				5B07075C19C349BF008519CD /* obstacleExplode.m4a */,
 				5B07075D19C349BF008519CD /* shipExplode.m4a */,
 				5B07075E19C349BF008519CD /* shoot.m4a */,
@@ -219,6 +222,7 @@
 				5B3E745819C2435900AEFB6E /* LaunchScreen.xib in Resources */,
 				5B3E745519C2435900AEFB6E /* Images.xcassets in Resources */,
 				5B07075B19C32B48008519CD /* enemy.png in Resources */,
+				5B07076319C34BA1008519CD /* powerup.png in Resources */,
 				5B3E744C19C2435900AEFB6E /* GameScene.sks in Resources */,
 				5B99E92E19C24D2D006EC4BD /* asteroid.png in Resources */,
 				5B07076119C34B35008519CD /* obstacleExplode.m4a in Resources */,

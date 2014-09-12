@@ -13,6 +13,7 @@
 		5B07076119C34B35008519CD /* obstacleExplode.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5B07075C19C349BF008519CD /* obstacleExplode.m4a */; };
 		5B07076319C34BA1008519CD /* powerup.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B07076219C34BA1008519CD /* powerup.png */; };
 		5B07076519C364A8008519CD /* StarField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B07076419C364A8008519CD /* StarField.swift */; };
+		5B2BD28E19C36FC4007F9320 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2BD28D19C36FC4007F9320 /* extensions.swift */; };
 		5B37FA4C19C367B10056A786 /* shootingstar.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B37FA4B19C367B10056A786 /* shootingstar.png */; };
 		5B3E744A19C2435900AEFB6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3E744919C2435900AEFB6E /* AppDelegate.swift */; };
 		5B3E744C19C2435900AEFB6E /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B3E744B19C2435900AEFB6E /* GameScene.sks */; };
@@ -45,6 +46,7 @@
 		5B07075E19C349BF008519CD /* shoot.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = shoot.m4a; sourceTree = "<group>"; };
 		5B07076219C34BA1008519CD /* powerup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = powerup.png; sourceTree = "<group>"; };
 		5B07076419C364A8008519CD /* StarField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarField.swift; sourceTree = "<group>"; };
+		5B2BD28D19C36FC4007F9320 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		5B37FA4B19C367B10056A786 /* shootingstar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shootingstar.png; sourceTree = "<group>"; };
 		5B3E744419C2435900AEFB6E /* SpaceRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B3E744819C2435900AEFB6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				5B3E745619C2435900AEFB6E /* LaunchScreen.xib */,
 				5B3E744719C2435900AEFB6E /* Supporting Files */,
 				5B07076419C364A8008519CD /* StarField.swift */,
+				5B2BD28D19C36FC4007F9320 /* extensions.swift */,
 			);
 			path = SpaceRun;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B2BD28E19C36FC4007F9320 /* extensions.swift in Sources */,
 				5B07076519C364A8008519CD /* StarField.swift in Sources */,
 				5B3E744E19C2435900AEFB6E /* GameScene.swift in Sources */,
 				5B3E745019C2435900AEFB6E /* GameViewController.swift in Sources */,

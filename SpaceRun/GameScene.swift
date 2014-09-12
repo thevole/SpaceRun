@@ -46,10 +46,40 @@ class GameScene: SKScene {
         shoot()
         lastShotFireTime = currentTime
       }
-      
-      lastUpdateTime = currentTime
     }
     
+    if arc4random_uniform(UInt32(1000)) <= 15 {
+      dropAsteroid()
+    }
+    
+    lastUpdateTime = currentTime
+    
+  }
+  
+  func dropAsteroid() {
+    let sideSize = CGFloat(15 + arc4random_uniform(UInt32(30)))
+    let maxX = self.size.width
+    let quarterX = maxX / 4
+    let startX = CGFloat(arc4random_uniform(UInt32(maxX + (quarterX * 2)))) - quarterX
+    let startY = self.size.height + sideSize
+    let endX = CGFloat(arc4random_uniform(UInt32(maxX)))
+    let endY = CGFloat(0 - sideSize)
+    
+    let asteroid = SKSpriteNode(imageNamed: "asteroid")
+    asteroid.size = CGSize(width: sideSize, height: sideSize)
+    asteroid.position = CGPoint(x: startX, y: startY)
+    asteroid.name = "obstacle"
+    addChild(asteroid)
+    
+    let move = SKAction.moveTo(CGPoint(x: endX, y: endY), duration: NSTimeInterval(3 + arc4random_uniform(UInt32(4))))
+    let remove = SKAction.removeFromParent()
+    let travelAndRemove = SKAction.sequence([move, remove])
+    
+    let spin = SKAction.rotateByAngle(3.0, duration: NSTimeInterval(arc4random_uniform(UInt32(2)) + 1))
+    let spinForever = SKAction.repeatActionForever(spin)
+    
+    let all = SKAction.group([spinForever, travelAndRemove])
+    asteroid.runAction(all)
   }
   
   func shoot() {
@@ -62,7 +92,9 @@ class GameScene: SKScene {
     let fly = SKAction.moveByX(0,
       y: self.size.height + photon.size.height,
       duration: 0.5)
-    photon.runAction(fly)
+    let remove = SKAction.removeFromParent()
+    let fireAndRemove = SKAction.sequence([fly, remove])
+    photon.runAction(fireAndRemove)
     
     
   }

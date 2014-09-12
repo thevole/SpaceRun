@@ -11,8 +11,14 @@ import SpriteKit
 class GameScene: SKScene {
   
   weak var shipTouch: UITouch?
+  
   var lastUpdateTime: NSTimeInterval? = nil
   var lastShotFireTime: NSTimeInterval? = nil
+  
+  var shootSound: SKAction?
+  var shipExplodeSound: SKAction?
+  var obstacleExplodeSound: SKAction?
+  
   
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
@@ -24,6 +30,12 @@ class GameScene: SKScene {
     ship.size  = CGSize(width: 40, height: 40)
     ship.name = "ship"
     addChild(ship)
+    
+    // Add sounds
+    shootSound = SKAction.playSoundFileNamed("shoot.m4a", waitForCompletion: false)
+    obstacleExplodeSound = SKAction.playSoundFileNamed("obstacleExplode.m4a", waitForCompletion: false)
+    shipExplodeSound = SKAction.playSoundFileNamed("shipExplode.m4a", waitForCompletion: false)
+    
   }
   
   override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
@@ -49,9 +61,10 @@ class GameScene: SKScene {
     }
     
     if arc4random_uniform(UInt32(1000)) <= 15 {
-      dropAsteroid()
+      dropThing()
     }
     
+    checkCollisions()
     lastUpdateTime = currentTime
     
   }
@@ -61,7 +74,91 @@ class GameScene: SKScene {
   }
   
   func randomCGFloatTo(limit: CGFloat) -> CGFloat {
-    return CGFloat(arc4random_uniform(UInt32(limit)))
+    return randomCGFloatTo(Int(limit))
+  }
+  
+  func checkCollisions() {
+    if let ship = childNodeWithName("ship") {
+      enumerateChildNodesWithName("obstacle") {
+        obstacle, stop in
+          if ship.intersectsNode(obstacle) {
+            self.shipTouch = nil
+            ship.removeFromParent()
+            obstacle.removeFromParent()
+            self.runAction(self.shipExplodeSound)
+          }
+          self.enumerateChildNodesWithName("photon") {
+            photon, stop in
+              if photon.intersectsNode(obstacle) {
+                photon.removeFromParent()
+                obstacle.removeFromParent()
+                self.runAction(self.obstacleExplodeSound)
+                stop.memory = true
+              }
+          }
+      }
+    }
+  }
+  
+  func dropThing() {
+    let dice = arc4random_uniform(100)
+    if dice < 15 {
+      dropEnemyShip()
+    } else {
+      dropAsteroid()
+    }
+  }
+  
+  func dropEnemyShip() {
+    let sideSize = CGFloat(30.0)
+    let startX = randomCGFloatTo(size.width - 40.0) + 20.0
+    let startY = size.height + sideSize
+    
+    let enemy = SKSpriteNode(imageNamed: "enemy")
+    enemy.size = CGSize(width: sideSize, height: sideSize)
+    enemy.position = CGPoint(x: startX, y: startY)
+    enemy.name = "obstacle"
+    addChild(enemy)
+    
+    let shipPath = buildEnemyShipMovementPath()
+    let followPath = SKAction.followPath(shipPath,
+      asOffset: true,
+      orientToPath: true,
+      duration: NSTimeInterval(7))
+    let remove = SKAction.removeFromParent()
+    let all = SKAction.sequence([followPath, remove])
+    enemy.runAction(all)
+    
+  }
+  
+  func buildEnemyShipMovementPath() -> CGPathRef {
+    let bezierPath = UIBezierPath()
+    bezierPath.moveToPoint(CGPoint(x: 0.5, y: -0.5))
+    bezierPath.addCurveToPoint(CGPoint(x: -2.5, y: -59.5),
+      controlPoint1: CGPoint(x: 0.5, y: -0.5),
+      controlPoint2: CGPoint(x: 4.55, y: -29.48))
+    bezierPath.addCurveToPoint(CGPoint(x: -27.5, y: -154.5),
+      controlPoint1: CGPoint(x: -9.55, y: -89.52),
+      controlPoint2: CGPoint(x: -43.32, y: -115.43))
+    bezierPath.addCurveToPoint(CGPoint(x: 30.5, y: -243.5),
+      controlPoint1: CGPoint(x: -11.68, y: -193.57),
+      controlPoint2: CGPoint(x: 17.28, y: -186.95))
+    bezierPath.addCurveToPoint(CGPoint(x: -52.5, y: -379.5),
+      controlPoint1: CGPoint(x: 42.72, y: -300.05),
+      controlPoint2: CGPoint(x: -47.71, y: -335.76))
+    bezierPath.addCurveToPoint(CGPoint(x: 54.5, y: -449.5),
+      controlPoint1: CGPoint(x: -57.29, y: -423.24),
+      controlPoint2: CGPoint(x: -8.14, y: -482.45))
+    bezierPath.addCurveToPoint(CGPoint(x: -5.5, y: -348.5),
+      controlPoint1: CGPoint(x: 117.14, y: -416.55),
+      controlPoint2: CGPoint(x: 52.25, y: -308.62))
+    bezierPath.addCurveToPoint(CGPoint(x: 0.5, y: -559.5),
+      controlPoint1: CGPoint(x: 23.74, y: -514.16),
+      controlPoint2: CGPoint(x: 6.93, y: -537.57))
+    bezierPath.addCurveToPoint(CGPoint(x: -2.5, y: -644.5),
+      controlPoint1: CGPoint(x: -5.2, y: -578.93),
+      controlPoint2: CGPoint(x: -2.5, y: -644.5))
+    return bezierPath.CGPath
   }
   
   func dropAsteroid() {
@@ -106,8 +203,7 @@ class GameScene: SKScene {
     let remove = SKAction.removeFromParent()
     let fireAndRemove = SKAction.sequence([fly, remove])
     photon.runAction(fireAndRemove)
-    
-    
+    runAction(shootSound)
   }
   
   func moveShipTowardPoint(point: CGPoint, byTimeDelta timeDelta: NSTimeInterval) {

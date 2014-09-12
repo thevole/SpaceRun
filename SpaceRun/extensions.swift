@@ -9,14 +9,22 @@
 import SpriteKit
 
 extension SKEmitterNode {
-  func nodeWithFile(filename: String) -> SKEmitterNode {
+  class func nodeWithFile(filename: String) -> SKEmitterNode? {
     let basename = filename.stringByDeletingPathExtension
+    
     var extensionText = filename.pathExtension
     if extensionText == "" {
       extensionText = "sks"
     }
+    
     let path = NSBundle.mainBundle().pathForResource(basename, ofType: extensionText)
-    let node = NSKeyedUnarchiver.unarchiveObjectWithFile(path!) as SKEmitterNode
+    
+    var sceneData = NSData.dataWithContentsOfFile(path!, options: .DataReadingMappedIfSafe, error: nil)
+    var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
+    
+    archiver.setClass(SKEmitterNode.self, forClassName: "SKEditorScene")
+    let node = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as SKEmitterNode?
+    archiver.finishDecoding()
     return node
   }
 }

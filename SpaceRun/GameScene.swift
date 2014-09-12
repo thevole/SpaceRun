@@ -38,6 +38,10 @@ class GameScene: SKScene {
     ship.name = "ship"
     addChild(ship)
     
+    let thrust = SKEmitterNode.nodeWithFile("thrust.sks")!
+    thrust.position = CGPoint(x: 0, y: -20)
+    ship.addChild(thrust)
+    
     // Add sounds
     shootSound = SKAction.playSoundFileNamed("shoot.m4a", waitForCompletion: false)
     obstacleExplodeSound = SKAction.playSoundFileNamed("obstacleExplode.m4a", waitForCompletion: false)
@@ -98,26 +102,26 @@ class GameScene: SKScene {
           let waitAndPowerdown = SKAction.sequence([wait, powerdown])
           ship.removeActionForKey("waitAndPowerDown")
           ship.runAction(waitAndPowerdown, withKey: "waitAndPowerDown")
-
+          
         }
       }
       enumerateChildNodesWithName("obstacle") {
         obstacle, stop in
-          if ship.intersectsNode(obstacle) {
-            self.shipTouch = nil
-            ship.removeFromParent()
+        if ship.intersectsNode(obstacle) {
+          self.shipTouch = nil
+          ship.removeFromParent()
+          obstacle.removeFromParent()
+          self.runAction(self.shipExplodeSound)
+        }
+        self.enumerateChildNodesWithName("photon") {
+          photon, stop in
+          if photon.intersectsNode(obstacle) {
+            photon.removeFromParent()
             obstacle.removeFromParent()
-            self.runAction(self.shipExplodeSound)
+            self.runAction(self.obstacleExplodeSound)
+            stop.memory = true
           }
-          self.enumerateChildNodesWithName("photon") {
-            photon, stop in
-              if photon.intersectsNode(obstacle) {
-                photon.removeFromParent()
-                obstacle.removeFromParent()
-                self.runAction(self.obstacleExplodeSound)
-                stop.memory = true
-              }
-          }
+        }
       }
     }
   }
@@ -210,9 +214,9 @@ class GameScene: SKScene {
   func dropAsteroid() {
     let sideSize = CGFloat(15 + randomCGFloatTo(30))
     let maxX = CGFloat(self.size.width)
-
+    
     let quarterX = maxX / 4
-
+    
     let startX = randomCGFloatTo(maxX + (quarterX * 2)) - quarterX
     let startY = self.size.height + sideSize
     let endX = randomCGFloatTo(maxX)
@@ -220,7 +224,7 @@ class GameScene: SKScene {
     
     let asteroid = SKSpriteNode(imageNamed: "asteroid")
     asteroid.size = CGSize(width: sideSize, height: sideSize)
-
+    
     asteroid.position = CGPoint(x: startX, y: startY)
     asteroid.name = "obstacle"
     addChild(asteroid)
